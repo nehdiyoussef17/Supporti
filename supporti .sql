@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 23 nov. 2020 à 12:34
+-- Généré le :  Dim 29 nov. 2020 à 17:48
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -190,19 +190,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `prenom_user` varchar(255) NOT NULL,
   `email_user` varchar(255) NOT NULL,
   `password_user` varchar(255) NOT NULL,
-  `equipe_favorite` varchar(255) NOT NULL,
+  `equipe_favorite` varchar(255) DEFAULT NULL,
   `tel_user` int(8) NOT NULL,
+  `salt` varchar(18) NOT NULL,
   PRIMARY KEY (`id_user`),
   KEY `equipe_favorite` (`equipe_favorite`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nom_user`, `prenom_user`, `email_user`, `password_user`, `equipe_favorite`, `tel_user`) VALUES
-(3, 'anistest', 'chebbi', 'chebi.youssef@gmail.com', 'anis', 'anis', 2222442),
-(2, 'nehdi', 'youssef', 'nehdi.youssef@gmail.com', 'test', 'test', 22222);
+INSERT INTO `user` (`id_user`, `nom_user`, `prenom_user`, `email_user`, `password_user`, `equipe_favorite`, `tel_user`, `salt`) VALUES
+(7, 'nehdi', 'youssef', 'nehdi.youssef@gmail.com', '09b13d28bf3782407e1e4111ff457dacb34808c32a68d482c66fd446815e7445d0431e886b473895e1a706fde2c6842f9c1a0f25e8cdf5e945ee5cccec3dad74', NULL, 12345678, 'a5bea14e9e7ba287');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
