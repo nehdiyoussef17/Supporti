@@ -21,10 +21,12 @@ app.get('/', (req, res) => {
 // Require user routes
 const userRoutes = require('./src/routes/user.routes')
 const accessoireRoutes = require('./src/routes/accessoire.routes')
+const billetRoutes = require('./src/routes/billet.routes')
 
 // using as middleware
 app.use('/user', userRoutes)
 app.use('/accessoire', accessoireRoutes)
+app.use('/billet', billetRoutes)
 
 
 
