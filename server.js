@@ -20,9 +20,13 @@ app.get('/', (req, res) => {
 
 // Require user routes
 const userRoutes = require('./src/routes/user.routes')
+const accessoireRoutes = require('./src/routes/accessoire.routes')
 
 // using as middleware
-app.use('/supporti', userRoutes)
+app.use('/user', userRoutes)
+app.use('/accessoire', accessoireRoutes)
+
+
 
 // listen for requests
 app.listen(port, () => {
