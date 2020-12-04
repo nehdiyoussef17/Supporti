@@ -31,7 +31,7 @@ billet.findById = function (id, result) {
     });
 };
 billet.findAll = function (result) {
-    dbConn.query("Select * from billet", function (err, res) {
+    dbConn.query("SELECT billet.prix_billet,equipe.nom_eq FROM billet,matchs,equipe WHERE billet.id_match=matchs.id_matchs AND equipe.id_eq=matchs.id_matchs;", function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);

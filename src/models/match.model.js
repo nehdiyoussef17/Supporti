@@ -10,7 +10,7 @@ var match = function(match){
 
 };
 match.create = function (newUsr, result) {
-    dbConn.query("INSERT INTO `match` set ?", newUsr, function (err, res) {
+    dbConn.query("INSERT INTO `matchs` set ?", newUsr, function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -22,7 +22,7 @@ match.create = function (newUsr, result) {
     });
 };
 match.findById = function (id, result) {
-    dbConn.query("SELECT * FROM `match` WHERE id_matchs = ? ", id, function (err, res) {
+    dbConn.query("SELECT * FROM `matchs` WHERE id_matchs = ? ", id, function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -33,7 +33,7 @@ match.findById = function (id, result) {
     });
 };
 match.findAll = function (result) {
-    dbConn.query("SELECT * FROM `match`", function (err, res) {
+    dbConn.query("SELECT * FROM `matchs`", function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);
@@ -45,7 +45,7 @@ match.findAll = function (result) {
     });
 };
 match.update = function(id, match, result){
-    dbConn.query("UPDATE `match` SET equipe1=?,equipe2=?,date_matchs=?,billets_restants=? WHERE id_matchs = ?", [match.equipe1,match.equipe2,match.date_matchs,match.billets_restants, id], function (err, res) {
+    dbConn.query("UPDATE `matchs` SET equipe1=?,equipe2=?,date_matchs=?,billets_restants=? WHERE id_matchs = ?", [match.equipe1,match.equipe2,match.date_matchs,match.billets_restants, id], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);
@@ -55,7 +55,7 @@ match.update = function(id, match, result){
     });
 };
 match.delete = function(id, result){
-    dbConn.query("DELETE FROM `match` WHERE id_matchs = ?", [id], function (err, res) {
+    dbConn.query("DELETE FROM `matchs` WHERE id_matchs = ?", [id], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);
