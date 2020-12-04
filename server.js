@@ -133,9 +133,13 @@ app.post('/login/', (req, res, next) => {
 
 // Require user routes
 const userRoutes = require('./src/routes/user.routes')
+const eqRoutes = require('./src/routes/equipe.routes')
 
 // using as middleware
-app.use('/supporti', userRoutes)
+app.use('/user', userRoutes)
+
+app.use('/equipe', eqRoutes)
+
 
 // listen for requests
 app.listen(port, () => {
