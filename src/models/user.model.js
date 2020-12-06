@@ -1,14 +1,17 @@
 'user strict';
 var dbConn = require('./../../config/db.config');
 
+
 //user object create
 var user = function(user){
     this.nom_user     = user.nom_user;
     this.prenom_user      = user.prenom_user;
     this.email_user         = user.email_user;
-    this.password_user          = user.password_user;
+    this.password_user         = user.password_user;
     this.equipe_favorite   = user.equipe_favorite;
     this.tel_user    = user.tel_user;
+
+
 
 };
 user.create = function (newUsr, result) {
@@ -67,5 +70,7 @@ user.delete = function(id, result){
         }
     }); 
 };
+
+
 
 module.exports= user;
