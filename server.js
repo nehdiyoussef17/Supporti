@@ -139,14 +139,16 @@ const billetRoutes = require('./src/routes/billet.routes')
 const matchRoutes = require('./src/routes/match.routes')
 const storeRoutes = require('./src/routes/store.routes')
 
+const actualiteRoutes = require('./src/routes/actualite.routes')
+
 // using as middleware
 app.use('/user', userRoutes)
 app.use('/accessoire', accessoireRoutes)
 app.use('/billet', billetRoutes)
 app.use('/match', matchRoutes)
 app.use('/store', storeRoutes)
-
 app.use('/equipe', eqRoutes)
+app.use('/actualite', actualiteRoutes)
 
 
 
