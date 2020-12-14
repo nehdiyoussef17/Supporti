@@ -33,7 +33,7 @@ actualite.findById = function (id, result) {
     });
 };
 actualite.findAll = function (result) {
-    dbConn.query("SELECT * FROM actualite", function (err, res) {
+    dbConn.query("SELECT * FROM `actualite` ORDER BY date_act DESC LIMIT 10", function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);
