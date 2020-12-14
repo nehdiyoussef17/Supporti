@@ -4,6 +4,8 @@ var crypto = require('crypto');
 // create express app
 const app = express();
 var dbConn = require('./config/db.config');
+var nodemailer = require('nodemailer');
+
 
 // Setup server port
 const port = process.env.PORT || 5000;
@@ -17,6 +19,15 @@ app.use(bodyParser.json())
 // define a root route
 app.get('/', (req, res) => {
   res.send("Hello World");
+});
+
+//mailing
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'smailing396@gmail.com\n',
+    pass: 'supporti123'
+  }
 });
 
 
@@ -88,6 +99,20 @@ app.post('/register/', (req, res, next) => {
               res.json('Register Error: ', err);
 
             });
+            var mailOptions = {
+              from: 'smailing396@gmail.com\n',
+              to: email_user,
+              subject: 'Bienvenu a supporti',
+              text: `Bienvenu a supporti.tn`
+            };
+
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            });
             res.json('Register Successful!');
           })
     }
@@ -119,13 +144,14 @@ app.post('/login/', (req, res, next) => {
       //Hash password from Login request with salt in Database
       var hashed_password = checkHashPassword(user_password, salt).passwordHash;
       if (password_user == hashed_password)
-        res.end(JSON.stringify(result[0])) // If password is true, return all info of User
+        res.end(JSON.stringify('welcome')) // If password is true, return all info of User
       else
         res.end(JSON.stringify('Wrong Password'));
     }
     else {
       res.json('User Not Found!!!');
     }
+
   });
 
 })
