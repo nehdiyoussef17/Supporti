@@ -99,6 +99,7 @@ app.post('/register/', (req, res, next) => {
               res.json('Register Error: ', err);
 
             });
+            //sending mail while regisitring
             var mailOptions = {
               from: 'smailing396@gmail.com\n',
               to: email_user,
