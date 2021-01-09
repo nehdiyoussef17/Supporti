@@ -71,6 +71,16 @@ user.delete = function(id, result){
     }); 
 };
 
+user.affectEquipe = function(id, user, result){
+    dbConn.query("UPDATE user SET equipe_favorite=? WHERE id_user = ?", [user.equipe_favorite, id], function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }else{
+            result(null, res);
+        }
+    });
+};
 
 
 module.exports= user;

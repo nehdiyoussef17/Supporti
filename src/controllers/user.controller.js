@@ -50,6 +50,18 @@ exports.update = function(req, res) {
     }
   
 };
+exports.affectEquipe = function(req, res) {
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
+        res.status(400).send({ error:true, message: 'Please provide all required field' });
+    }else{
+        user.affectEquipe(req.params.id, new user(req.body), function(err, user) {
+            if (err)
+                res.send(err);
+            res.json({ error:false, message: 'user successfully updated' });
+        });
+    }
+
+};
 
 
 exports.delete = function(req, res) {

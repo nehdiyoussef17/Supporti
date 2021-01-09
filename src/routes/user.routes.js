@@ -16,6 +16,9 @@ router.put('/update_user:id', userController.update);
 
 // Delete a user with id
 router.delete('/delete_user:id', userController.delete);
+//affectation equipe with id
+router.put('/affect_equipe:id', userController.affectEquipe);
+
 
 
 

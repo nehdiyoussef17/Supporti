@@ -144,7 +144,8 @@ app.post('/login/', (req, res, next) => {
       //Hash password from Login request with salt in Database
       var hashed_password = checkHashPassword(user_password, salt).passwordHash;
       if (password_user == hashed_password)
-        res.end(JSON.stringify('welcome')) // If password is true, return all info of User
+      	res.end(JSON.stringify(result[0]))
+       // res.end(JSON.stringify('welcome')) // If password is true, return all info of User
       else
         res.end(JSON.stringify('Wrong Password'));
     }
