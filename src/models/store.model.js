@@ -31,7 +31,7 @@ store.findById = function (id, result) {
     });
 };
 store.findAll = function (result) {
-    dbConn.query("SELECT store.nom_store,equipe.nom_eq FROM store,equipe WHERE store.id_eq=equipe.id_eq", function (err, res) {
+    dbConn.query("SELECT storeca.nom_store,equipe.nom_eq FROM storeca,equipe WHERE storeca.id_eq=equipe.id_eq", function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);

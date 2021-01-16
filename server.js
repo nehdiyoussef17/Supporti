@@ -5,6 +5,7 @@ var crypto = require('crypto');
 const app = express();
 var dbConn = require('./config/db.config');
 var nodemailer = require('nodemailer');
+var fs = require('fs');
 
 
 // Setup server port
@@ -22,12 +23,15 @@ app.get('/', (req, res) => {
 });
 
 //mailing
+
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'smailing396@gmail.com\n',
+    user: 'smailing396@gmail.com',
     pass: 'supporti123'
   }
+
+
 });
 
 
@@ -69,7 +73,21 @@ function checkHashPassword(userPassword, salt) {
 
 
 
-
+///diplay images
+app.get('/uploads/:upload', function (req, res){
+    file = req.params.upload;
+    console.log(req.params.upload);
+    var img = fs.readFileSync(__dirname + "/uploads/" + file);
+    res.writeHead(200, {'Content-Type': 'image/png' });
+    res.end(img, 'binary');
+  
+  });
+app.post("/user/affected_equipe",(req,res)=>{
+  dbConn.query("UPDATE user SET equipe_favorite=? WHERE id_user = ?", [req.body.id_equipe, req.body.id_user],function(err,result){
+    if(err) throw err;
+    return res.json({message : 1});
+  });
+});
 
 
 
@@ -93,27 +111,35 @@ app.post('/register/', (req, res, next) => {
       res.json('User already exists!!!');
     else {
       dbConn.query("INSERT INTO user (`nom_user`, `prenom_user`, `email_user`, `password_user`,`equipe_favorite`, `tel_user` ,`salt`) VALUES(?, ?, ?, ?, ?, ?,?)",
-          [ nom_user, prenom_user, email_user, password_user, equipe_favorite, tel_user, salt], function(err, result, fields) {
+          [ nom_user, prenom_user, email_user, password_user, 0, tel_user, salt], function(err, result, fields) {
             dbConn.on('error', function (err) {
               console.log('[MySQL ERROR]', err);
               res.json('Register Error: ', err);
 
             });
             var mailOptions = {
-              from: 'smailing396@gmail.com\n',
+              from: 'smailing396@gmail.com',
               to: email_user,
               subject: 'Bienvenu a supporti',
               text: `Bienvenu a supporti.tn`
             };
+            
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 
             transporter.sendMail(mailOptions, function(error, info){
               if (error) {
                 console.log(error);
-              } else {
+              } else 
+
+
+              {
+
                 console.log('Email sent: ' + info.response);
               }
             });
             res.json('Register Successful!');
+            transporter.close();
           })
     }
   });
